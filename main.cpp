@@ -6,5 +6,6 @@ int main() {
     BigDecimalInt y("999");
     BigDecimalInt z(x + y);
 
-    cout << z.getBDI() ;
+    cout << z.getBDI() <<'\n';
+    cout << z.size() ;
 }

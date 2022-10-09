@@ -10,5 +10,6 @@ class BigDecimalInt{
         BigDecimalInt(int decInt);
         string getBDI();
         BigDecimalInt operator+ (BigDecimalInt anotherDec);
+        int size();
 };
 

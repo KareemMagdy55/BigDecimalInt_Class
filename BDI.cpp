@@ -46,9 +46,13 @@ BigDecimalInt BigDecimalInt::operator+(BigDecimalInt anotherDec) {
 
     string str ;
     for ( int & i : total )
-        str += (i+48);
+        str += (i + 48);
 
     BigDecimalInt totalBDI(str);
     return totalBDI;
 
+}
+
+int BigDecimalInt::size() {
+    return BDI.length() ;
 }
