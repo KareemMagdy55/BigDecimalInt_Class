@@ -56,3 +56,6 @@ BigDecimalInt BigDecimalInt::operator+(BigDecimalInt anotherDec) {
 int BigDecimalInt::size() {
     return BDI.length() ;
 }
+int BigDecimalInt::sign() {
+    return (BDI[0] == '-' ? -1 : 1);
+}
