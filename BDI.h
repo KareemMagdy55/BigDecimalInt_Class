@@ -8,5 +8,7 @@ class BigDecimalInt{
     public:
         BigDecimalInt(string decStr);
         BigDecimalInt(int decInt);
+        string getBDI();
+
 };
 

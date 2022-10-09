@@ -17,3 +17,6 @@ BigDecimalInt::BigDecimalInt(int decInt) {
     BDI = to_string(decInt);
 }
 
+string BigDecimalInt::getBDI() {
+    return BDI ;
+}
