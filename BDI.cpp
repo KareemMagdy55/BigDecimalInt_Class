@@ -41,6 +41,9 @@ BigDecimalInt BigDecimalInt::operator+(BigDecimalInt anotherDec) {
         sum = (sum / 10 ) % 10 ;
         total.push_front(carry) ;
     }
+    if ( bdi1[0] + bdi2[0] > 10 )
+        total.push_front((bdi1[0] + bdi2[0]) / 10 % 10 ) ;
+
     string str ;
     for ( int & i : total )
         str += (i+48);

@@ -2,8 +2,8 @@
 #include "BDI.cpp"
 
 int main() {
-    BigDecimalInt x("300");
-    BigDecimalInt y("200");
+    BigDecimalInt x("999");
+    BigDecimalInt y("999");
     BigDecimalInt z(x + y);
 
     cout << z.getBDI() ;
