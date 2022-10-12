@@ -20,6 +20,7 @@ BigDecimalInt::BigDecimalInt(int decInt) {
 string BigDecimalInt::getBDI() {
     return BDI ;
 }
+
 BigDecimalInt BigDecimalInt::operator+(BigDecimalInt anotherDec) {
 
     int maxLen = max ( BDI.length() , anotherDec.getBDI().length());
@@ -53,9 +54,38 @@ BigDecimalInt BigDecimalInt::operator+(BigDecimalInt anotherDec) {
 
 }
 
+
+bool BigDecimalInt:: operator> (BigDecimalInt anotherDec){
+
+    int maxLen = max ( BDI.length() , anotherDec.getBDI().length());
+    deque<int> bdi1;
+    deque<int> bdi2;
+
+    for(char& ch : BDI){
+        bdi1.push_back(ch - 48);
+    }
+    for(char& ch : anotherDec.getBDI()){
+        bdi2.push_back(ch - 48);
+    }
+    int minLen = min(bdi1.size(), bdi2.size()) ;
+    for (int i = minLen; i < maxLen; ++i) {
+        (bdi1.size() > bdi2.size() ? bdi2 : bdi1).push_front(0);
+    }
+
+    for (int i = 0; i < maxLen; ++i) {
+        if ( bdi1[i] > bdi2[i]) return true;
+        else if ( bdi1[i] < bdi2[i]) return false;
+
+    }
+    return false;
+
+}
+
+
 int BigDecimalInt::size() {
-    return BDI.length() ;
+    return BDI.length();
 }
 int BigDecimalInt::sign() {
     return (BDI[0] == '-' ? -1 : 1);
 }
+
