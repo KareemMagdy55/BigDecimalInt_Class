@@ -11,8 +11,7 @@ class BigDecimalInt{
         string getBDI();
         BigDecimalInt operator+ (BigDecimalInt anotherDec);
         bool operator> (BigDecimalInt anotherDec);
-
-
+        bool operator< (BigDecimalInt anotherDec);
         int size();
         int sign();
 };
