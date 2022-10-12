@@ -8,5 +8,9 @@ int main() {
 
 //    cout << z.getBDI() <<'\n';
 //    cout << z.size() << endl ;
-    cout << (z > x) ;
+//    cout << (z > x );
+//    cout << (z < x );
+    cout << (z == z) ;
+
+
 }
