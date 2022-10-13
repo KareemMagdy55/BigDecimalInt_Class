@@ -144,4 +144,9 @@ int BigDecimalInt::sign() {
     return (BDI[0] == '-' ? -1 : 1);
 }
 
+ostream& operator << (ostream& out, BigDecimalInt b){
+    out << b.BDI;
+    return out ;
+}
+
 

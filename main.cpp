@@ -10,7 +10,8 @@ int main() {
 //    cout << z.size() << endl ;
 //    cout << (z > x );
 //    cout << (z < x );
-    cout << (z == z) ;
+//    cout << (z == z) ;
+    cout << z ;
 
 
 }

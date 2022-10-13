@@ -15,5 +15,6 @@ class BigDecimalInt{
         bool operator==(BigDecimalInt anotherDec);
         int size();
         int sign();
+        friend ostream& operator << (ostream& out, BigDecimalInt b);
 };
 
