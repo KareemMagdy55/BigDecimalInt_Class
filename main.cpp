@@ -2,16 +2,13 @@
 #include "BDI.cpp"
 
 int main() {
-    BigDecimalInt x("999");
-    BigDecimalInt y("800");
-    BigDecimalInt z(x + y);
-
-//    cout << z.getBDI() <<'\n';
-//    cout << z.size() << endl ;
-//    cout << (z > x );
-//    cout << (z < x );
-//    cout << (z == z) ;
-    cout << z ;
-
+BigDecimalInt x("1000000000000");
+BigDecimalInt y("10000000000001");
+BigDecimalInt z(x+y);
+cout <<z<<'\n';
+z = x;
+cout  << z<<'\n';
+if(x < y){cout << "y is bigger";}
+else cout <<"x is bigger";
 
 }

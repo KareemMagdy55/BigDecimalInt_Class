@@ -3,7 +3,7 @@
 
 
 BigDecimalInt::BigDecimalInt(string decStr){
-    regex chkInt ("[0-9]+");
+    regex chkInt ("[+-]?[0-9]+");
 
     while (!regex_match(decStr, chkInt)) {
         cout << "\nInvalid input, please input another one : ";
@@ -23,27 +23,30 @@ string BigDecimalInt::getBDI() {
 
 BigDecimalInt BigDecimalInt::operator+(BigDecimalInt anotherDec) {
 
-    int maxLen = max ( BDI.length() , anotherDec.getBDI().length());
-    vector<int> bdi1(maxLen,0);
-    vector<int> bdi2(maxLen,0);
+    int maxlen = max(BDI.length(),anotherDec.getBDI().length());
+    vector<int> bdi1(maxlen,0);
+    vector<int> bdi2(maxlen,0);
 
     deque<int> total;
     for(int i = 0 ; i<BDI.length(); i++ ){
-        bdi1[i] = BDI[i] - 48;
+        bdi1[bdi1.size()-i-1] = (BDI[BDI.size()-1-i] - 48);
+      //  cout << bdi1[i];
     }
+   // cout <<'\n';
     for(int i = 0 ; i <anotherDec.getBDI().length(); i++ ){
-        bdi2[i] = anotherDec.getBDI()[i] - 48;
+        bdi2[bdi2.size()-i-1] = (anotherDec.getBDI()[anotherDec.getBDI().size()-1-i] - 48);
+       // cout << bdi2[i];
     }
 
     int sum = 0 ;
-    for(int i = maxLen - 1 ; i >= 0; i-- ){
-        sum += bdi1[i] + bdi2[i];
+    for(int i = 0 ; i < maxlen   ; i++ ){
+        sum += (bdi1[bdi1.size()-1-i] + bdi2[bdi2.size()-1-i]);
         int carry = sum % 10 ;
-        sum = (sum / 10 ) % 10 ;
+        sum /= 10  ;
         total.push_front(carry) ;
     }
-    if ( bdi1[0] + bdi2[0] > 10 )
-        total.push_front((bdi1[0] + bdi2[0]) / 10 % 10 ) ;
+   /* if ( bdi1[0] + bdi2[0] > 10 )
+        total.push_front((bdi1[0] + bdi2[0]) / 10 % 10 ) ;*/
 
     string str ;
     for ( int & i : total )
@@ -53,6 +56,25 @@ BigDecimalInt BigDecimalInt::operator+(BigDecimalInt anotherDec) {
     return totalBDI;
 
 }
+
+BigDecimalInt BigDecimalInt::operator-(BigDecimalInt anotherDec)
+{
+    int maxlen = max(BDI.length(),anotherDec.getBDI().length());
+    vector<int> bdi1(maxlen,0);
+    vector<int> bdi2(maxlen,0);
+
+    deque<int> total;
+    for(int i = 0 ; i<BDI.length(); i++ ){
+        bdi1[bdi1.size()-i-1] = (BDI[BDI.size()-1-i] - 48);
+        //  cout << bdi1[i];
+    }
+    // cout <<'\n';
+    for(int i = 0 ; i <anotherDec.getBDI().length(); i++ ){
+        bdi2[bdi2.size()-i-1] = (anotherDec.getBDI()[anotherDec.getBDI().size()-1-i] - 48);
+        // cout << bdi2[i];
+    }
+
+};
 
 
 bool BigDecimalInt:: operator> (BigDecimalInt anotherDec){
@@ -144,8 +166,8 @@ int BigDecimalInt::sign() {
     return (BDI[0] == '-' ? -1 : 1);
 }
 
-ostream& operator << (ostream& out, BigDecimalInt b){
-    out << b.BDI;
+ ostream& operator << (ostream& out, BigDecimalInt b){
+    out << b.getBDI();
     return out ;
 }
 

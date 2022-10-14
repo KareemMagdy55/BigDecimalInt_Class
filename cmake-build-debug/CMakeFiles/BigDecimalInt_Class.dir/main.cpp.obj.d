@@ -1,5 +1,5 @@
 CMakeFiles/BigDecimalInt_Class.dir/main.cpp.obj: \
- C:\Users\Mohamed\ reyad\Documents\BigDecimalInt_Class\main.cpp \
+ D:\Study\Assignment\ 1\ -\ OOP\BigDecimal\BigDecimalInt_Class\main.cpp \
  C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/iostream \
  C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
  C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32/bits/os_defines.h \
@@ -132,8 +132,8 @@ CMakeFiles/BigDecimalInt_Class.dir/main.cpp.obj: \
  C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/ostream.tcc \
  C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/istream \
  C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/istream.tcc \
- C:\Users\Mohamed\ reyad\Documents\BigDecimalInt_Class\BDI.cpp \
- C:\Users\Mohamed\ reyad\Documents\BigDecimalInt_Class\BDI.h \
+ D:\Study\Assignment\ 1\ -\ OOP\BigDecimal\BigDecimalInt_Class\BDI.cpp \
+ D:\Study\Assignment\ 1\ -\ OOP\BigDecimal\BigDecimalInt_Class\BDI.h \
  C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/regex \
  C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/algorithm \
  C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/utility \

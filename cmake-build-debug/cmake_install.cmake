@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/Mohamed reyad/Documents/BigDecimalInt_Class
+# Install script for directory: D:/Study/Assignment 1 - OOP/BigDecimal/BigDecimalInt_Class
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/Mohamed reyad/Documents/BigDecimalInt_Class/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/Study/Assignment 1 - OOP/BigDecimal/BigDecimalInt_Class/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

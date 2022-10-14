@@ -1,4 +1,4 @@
-"C:\Program Files\JetBrains\CLion 2021.3.4\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" "C:\Users\Mohamed reyad\Documents\BigDecimalInt_Class"
+"C:\Program Files\JetBrains\CLion 2021.3.4\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" "D:\Study\Assignment 1 - OOP\BigDecimal\BigDecimalInt_Class"
 -- The C compiler identification is GNU 11.2.0
 -- The CXX compiler identification is GNU 11.2.0
 -- Detecting C compiler ABI info
@@ -13,4 +13,4 @@
 -- Detecting CXX compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: C:/Users/Mohamed reyad/Documents/BigDecimalInt_Class/cmake-build-debug
+-- Build files have been written to: D:/Study/Assignment 1 - OOP/BigDecimal/BigDecimalInt_Class/cmake-build-debug
