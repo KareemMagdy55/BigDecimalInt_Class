@@ -25,13 +25,17 @@ deque<int> BigDecimalInt::sub(vector<int> bdi1, vector<int> bdi2, int maxlen) {
 
 for(int i=0;i<maxlen; i++){
     int count =1;
-    if(bdi2[bdi2.size() - 1 - i]>bdi1[bdi1.size() - 1 - i]){
+    if(bdi2[bdi2.size() - 1 - i]>=bdi1[bdi1.size() - 1 - i]){
         total.push_front(bdi2[bdi2.size() - 1 - i]-bdi1[bdi1.size() - 1 - i]);
     }
     else{
-        while (bdi2[bdi2.size() - 1 - i- count] == 0) { bdi2[bdi2.size() - 1 - i - count] += 9;
-        count+=1; }
+        while (bdi2[bdi2.size() - 1 - i-count] == 0)
+        {
+            bdi2[bdi2.size() - 1 - i - count] += 9;
+            count+=1;
+        }
         bdi2[bdi2.size() - 1 - i- count] -= 1;
+
         total.push_front((bdi2[bdi2.size() - 1 - i]+10)-bdi1[bdi1.size() - 1 - i]);
     }
 
@@ -48,7 +52,14 @@ BigDecimalInt::BigDecimalInt(string decStr){
         cin >> decStr ;
     }
 
-    BDI = decStr ;
+    if(decStr[0] != '+' && decStr[0] != '-')
+    {
+        BDI+='+';
+    }
+    for (int i = 0; i < decStr.length() ; ++i) {
+        BDI += decStr[i] ;
+    }
+
 }
 
 BigDecimalInt::BigDecimalInt(int decInt) {
@@ -108,14 +119,7 @@ BigDecimalInt BigDecimalInt::operator+(BigDecimalInt anotherDec) {
         BigDecimalInt totalBDI(str);
         return totalBDI;
     }
-    else if((BDI[0] == '+' && anotherDec.getBDI()[0] == '-')){}
-    else if((BDI[0] == '-' && anotherDec.getBDI()[0] == '+')){
-        return *this - anotherDec;
-    }
-}
-
-BigDecimalInt BigDecimalInt::operator-(BigDecimalInt anotherDec) {
-    if     ((BDI[0] == '-' && anotherDec.getBDI()[0] == '-')){
+    else if((BDI[0] == '+' && anotherDec.getBDI()[0] == '-')){
 
         int maxlen = max(BDI.length(), anotherDec.getBDI().length())-1;
         vector<int> bdi1(maxlen, 0);
@@ -129,9 +133,68 @@ BigDecimalInt BigDecimalInt::operator-(BigDecimalInt anotherDec) {
             bdi2[bdi2.size() - i - 1] = (anotherDec.getBDI()[anotherDec.getBDI().size() - 1 - i] - 48);
 // cout << bdi2[i];
         }
+
         string str;
-        if(*this > anotherDec)
+        BDI[0] = '0';
+        anotherDec.setter('0');
+
+        if(*this < anotherDec)
         {
+
+            deque<int> total = sub(bdi1,bdi2,maxlen);
+
+            str += '-';
+            for (int &i: total)
+                str += (to_string(i));
+
+        }
+
+        else if(*this == anotherDec){
+            BDI[0] = '+';
+            anotherDec.setter('-');
+            BigDecimalInt totalBDI("0");
+            return  totalBDI;
+
+        }
+
+        else{
+
+            deque<int> total = sub(bdi2,bdi1,maxlen);
+            str += '+';
+            for (int &i: total)
+                str += (to_string(i));
+
+
+        }
+
+        BDI[0] = '+';
+        anotherDec.setter('-');
+
+        BigDecimalInt totalBDI(str);
+        return totalBDI;
+    }
+    else if((BDI[0] == '-' && anotherDec.getBDI()[0] == '+')){
+
+        int maxlen = max(BDI.length(), anotherDec.getBDI().length())-1;
+        vector<int> bdi1(maxlen, 0);
+        vector<int> bdi2(maxlen, 0);
+        for (int i = 0; i < BDI.length()-1; i++) {
+            bdi1[bdi1.size() - i - 1] = (BDI[BDI.size() - 1 - i] - 48);
+//  cout << bdi1[i];
+        }
+// cout <<'\n';
+        for (int i = 0; i < anotherDec.getBDI().length()-1; i++) {
+            bdi2[bdi2.size() - i - 1] = (anotherDec.getBDI()[anotherDec.getBDI().size() - 1 - i] - 48);
+// cout << bdi2[i];
+        }
+        BDI[0] = '0';
+        anotherDec.setter('0');
+
+        string str;
+
+        if(*this < anotherDec)
+        {
+
             deque<int> total = sub(bdi1,bdi2,maxlen);
 
             str += '+';
@@ -140,8 +203,10 @@ BigDecimalInt BigDecimalInt::operator-(BigDecimalInt anotherDec) {
 
         }
         else if(*this == anotherDec){
+            BDI[0] = '-';
+            anotherDec.setter('+');
             BigDecimalInt totalBDI("0");
-           return  totalBDI;
+            return  totalBDI;
         }
         else{
             deque<int> total = sub(bdi2,bdi1,maxlen);
@@ -153,12 +218,116 @@ BigDecimalInt BigDecimalInt::operator-(BigDecimalInt anotherDec) {
 
         }
 
-
+        BDI[0] = '-';
+        anotherDec.setter('+');
 
         BigDecimalInt totalBDI(str);
         return totalBDI;
     }
-    else if((BDI[0] == '+' && anotherDec.getBDI()[0] == '+')){}
+}
+
+BigDecimalInt BigDecimalInt::operator-(BigDecimalInt anotherDec) {
+    if((BDI[0] == '-' && anotherDec.getBDI()[0] == '-')){
+
+        int maxlen = max(BDI.length(), anotherDec.getBDI().length())-1;
+        vector<int> bdi1(maxlen, 0);
+        vector<int> bdi2(maxlen, 0);
+        for (int i = 0; i < BDI.length()-1; i++) {
+            bdi1[bdi1.size() - i - 1] = (BDI[BDI.size() - 1 - i] - 48);
+//  cout << bdi1[i];
+        }
+// cout <<'\n';
+        for (int i = 0; i < anotherDec.getBDI().length()-1; i++) {
+            bdi2[bdi2.size() - i - 1] = (anotherDec.getBDI()[anotherDec.getBDI().size() - 1 - i] - 48);
+// cout << bdi2[i];
+        }
+
+        string str;
+        BDI[0]= '0';
+        anotherDec.setter('0');
+        if(*this > anotherDec)
+        {
+            deque<int> total = sub(bdi2,bdi1,maxlen);
+
+            str += '-';
+            for (int &i: total)
+                str += (to_string(i));
+
+        }
+        else if(*this == anotherDec){
+            BigDecimalInt totalBDI("0");
+            BDI[0]= '-';
+            anotherDec.setter('-');
+           return  totalBDI;
+        }
+        else{
+            deque<int> total = sub(bdi1,bdi2,maxlen);
+
+            str += '+';
+            for (int &i: total)
+                str += (to_string(i));
+
+
+        }
+
+        BDI[0]= '-';
+        anotherDec.setter('-');
+
+        BigDecimalInt totalBDI(str);
+        return totalBDI;
+    }
+    else if((BDI[0] == '+' && anotherDec.getBDI()[0] == '+'))
+    {
+
+        int maxlen = max(BDI.length(), anotherDec.getBDI().length())-1;
+        vector<int> bdi1(maxlen, 0);
+        vector<int> bdi2(maxlen, 0);
+        for (int i = 0; i < BDI.length()-1; i++) {
+            bdi1[bdi1.size() - i - 1] = (BDI[BDI.size() - 1 - i] - 48);
+//  cout << bdi1[i];
+        }
+// cout <<'\n';
+        for (int i = 0; i < anotherDec.getBDI().length()-1; i++) {
+            bdi2[bdi2.size() - i - 1] = (anotherDec.getBDI()[anotherDec.getBDI().size() - 1 - i] - 48);
+// cout << bdi2[i];
+        }
+        BDI[0] = '0';
+        anotherDec.setter('0');
+
+        string str;
+
+        if(*this < anotherDec)
+        {
+
+            deque<int> total = sub(bdi1,bdi2,maxlen);
+
+            str += '-';
+            for (int &i: total)
+                str += (to_string(i));
+
+        }
+        else if(*this == anotherDec){
+            BDI[0] = '+';
+            anotherDec.setter('+');
+            BigDecimalInt totalBDI("0");
+            return  totalBDI;
+        }
+        else{
+            deque<int> total = sub(bdi2,bdi1,maxlen);
+
+            str += '+';
+            for (int &i: total)
+                str += (to_string(i));
+
+
+        }
+
+        BDI[0] = '+';
+        anotherDec.setter('+');
+
+        BigDecimalInt totalBDI(str);
+        return totalBDI;
+    }
     else if((BDI[0] == '-' && anotherDec.getBDI()[0] == '+')){
 
         int maxlen = max(BDI.length(), anotherDec.getBDI().length())-1;
@@ -190,12 +359,10 @@ BigDecimalInt BigDecimalInt::operator-(BigDecimalInt anotherDec) {
         vector<int> bdi2(maxlen, 0);
         for (int i = 0; i < BDI.length()-1; i++) {
             bdi1[bdi1.size() - i - 1] = (BDI[BDI.size() - 1 - i] - 48);
-//  cout << bdi1[i];
         }
-// cout <<'\n';
         for (int i = 0; i < anotherDec.getBDI().length()-1; i++) {
             bdi2[bdi2.size() - i - 1] = (anotherDec.getBDI()[anotherDec.getBDI().size() - 1 - i] - 48);
-// cout << bdi2[i];
+
         }
         deque<int> total = add(bdi1,bdi2,maxlen);
 
@@ -209,53 +376,65 @@ BigDecimalInt BigDecimalInt::operator-(BigDecimalInt anotherDec) {
     }
 };
 
-
 bool BigDecimalInt:: operator> (BigDecimalInt anotherDec){
+    int sign1 = this->sign() ;
+    int sign2 = anotherDec.sign() ;
 
-    int maxLen = max ( BDI.length() , anotherDec.getBDI().length());
     deque<int> bdi1;
     deque<int> bdi2;
 
     for(char& ch : BDI){
+        if ( ch == '-' || ch == '+') continue;
         bdi1.push_back(ch - 48);
     }
     for(char& ch : anotherDec.getBDI()){
+        if ( ch == '-' || ch == '+') continue;
         bdi2.push_back(ch - 48);
     }
+    int maxLen = max (bdi1.size(), bdi2.size());
     int minLen = min(bdi1.size(), bdi2.size()) ;
+
     for (int i = minLen; i < maxLen; ++i) {
         (bdi1.size() > bdi2.size() ? bdi2 : bdi1).push_front(0);
     }
 
     for (int i = 0; i < maxLen; ++i) {
-        if ( bdi1[i] > bdi2[i]) return true;
-        else if ( bdi1[i] < bdi2[i]) return false;
+        if ( bdi1[i] * sign1  > bdi2[i] * sign2) return true;
+        else if ( bdi1[i] * sign1 < bdi2[i] * sign2) return false;
 
     }
     return false;
+
 
 }
 
 bool BigDecimalInt:: operator< (BigDecimalInt anotherDec){
+    int sign1 = this->sign() ;
+    int sign2 = anotherDec.sign() ;
 
-    int maxLen = max ( BDI.length() , anotherDec.getBDI().length());
     deque<int> bdi1;
     deque<int> bdi2;
 
     for(char& ch : BDI){
+        if ( ch == '-' || ch == '+') continue;
         bdi1.push_back(ch - 48);
     }
+
     for(char& ch : anotherDec.getBDI()){
+        if ( ch == '-' || ch == '+') continue;
         bdi2.push_back(ch - 48);
     }
+
+    int maxLen = max (bdi1.size(), bdi2.size());
     int minLen = min(bdi1.size(), bdi2.size()) ;
+
     for (int i = minLen; i < maxLen; ++i) {
         (bdi1.size() > bdi2.size() ? bdi2 : bdi1).push_front(0);
     }
 
     for (int i = 0; i < maxLen; ++i) {
-        if ( bdi1[i] < bdi2[i]) return true;
-        else if ( bdi1[i] > bdi2[i]) return false;
+        if ( bdi1[i] * sign1  < bdi2[i] * sign2) return true;
+        else if ( bdi1[i] * sign1 > bdi2[i] * sign2) return false;
 
     }
     return false;
@@ -263,27 +442,30 @@ bool BigDecimalInt:: operator< (BigDecimalInt anotherDec){
 
 }
 
+bool BigDecimalInt:: operator== (BigDecimalInt anotherDec){
+    int sign1 = this->sign() ;
+    int sign2 = anotherDec.sign() ;
 
-
-bool BigDecimalInt::operator==(BigDecimalInt anotherDec) {
-
-    int maxLen = max ( BDI.length() , anotherDec.getBDI().length());
     deque<int> bdi1;
     deque<int> bdi2;
 
     for(char& ch : BDI){
+        if ( ch == '-' || ch == '+') continue;
         bdi1.push_back(ch - 48);
     }
     for(char& ch : anotherDec.getBDI()){
+        if ( ch == '-' || ch == '+') continue;
         bdi2.push_back(ch - 48);
     }
+    int maxLen = max (bdi1.size(), bdi2.size());
     int minLen = min(bdi1.size(), bdi2.size()) ;
+
     for (int i = minLen; i < maxLen; ++i) {
         (bdi1.size() > bdi2.size() ? bdi2 : bdi1).push_front(0);
     }
 
     for (int i = 0; i < maxLen; ++i) {
-        if ( bdi1[i] != bdi2[i]) return false;
+        if ( bdi1[i] * sign1 != bdi2[i] * sign2) return false;
 
     }
     return true;
@@ -291,7 +473,14 @@ bool BigDecimalInt::operator==(BigDecimalInt anotherDec) {
 
 }
 
+void BigDecimalInt::dltZeros() {
 
+    for (int i = 0; i < BDI.length(); ++i) {
+        if (!(BDI[i] - 48 ))
+            BDI.erase(BDI[i]) ;
+    }
+
+}
 int BigDecimalInt::size() {
     return BDI.length();
 }
@@ -299,9 +488,12 @@ int BigDecimalInt::sign() {
     return (BDI[0] == '-' ? -1 : 1);
 }
 
+
  ostream& operator << (ostream& out, BigDecimalInt b){
     out << b.getBDI();
     return out ;
 }
 
-
+void BigDecimalInt::setter(char a) {
+    BDI[0] = a;
+}

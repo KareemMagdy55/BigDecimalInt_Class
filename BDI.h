@@ -10,6 +10,7 @@ class BigDecimalInt{
         deque<int> sub(vector<int> bdi1,vector<int> bdi2,int maxlen);
 
 public:
+        void dltZeros() ;
         BigDecimalInt(string decStr);
         BigDecimalInt(int decInt);
         string getBDI();
@@ -17,6 +18,7 @@ public:
         BigDecimalInt operator+ (BigDecimalInt anotherDec);
         BigDecimalInt operator- (BigDecimalInt anotherDec);
         bool operator> (BigDecimalInt anotherDec);
+        void setter(char a);
         bool operator< (BigDecimalInt anotherDec);
         bool operator==(BigDecimalInt anotherDec);
         int size();
